@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pomelo Works｜ポメロワークス</title>
+<meta name="description" content="Pomelo Works（ポメロワークス）は、シンプルで使いやすいモバイルアプリをつくる日本の個人開発スタジオです。">
+<meta property="og:title" content="Pomelo Works｜ポメロワークス">
+<meta property="og:description" content="シンプルで使いやすいモバイルアプリをつくる、日本の個人開発スタジオです。">
+<meta property="og:url" content="https://pomeloworks.dev/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2048'%3E%3Ccircle%20cx='24'%20cy='24'%20r='20'%20fill='none'%20stroke='%23453C7A'%20stroke-width='4'/%3E%3Cpath%20d='M24%2024L24%209A15%2015%200%200%201%2034.6%2013.4Z'%20fill='%23453C7A'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Pomelo Works",
+  "alternateName": "ポメロワークス",
+  "url": "https://pomeloworks.dev/",
+  "email": "contact@pomeloworks.dev"
+}
+</script>
+<style>
+  :root {
+    /* design_color_tokens v0.3（ライトモード）に整合 */
+    --bg: #FAFAFB;
+    --surface: #FFFFFF;
+    --text: #1C1B2E;
+    --text-2: #5A5A6E;
+    --border: #E2E2EC;
+    --primary: #453C7A;
+    --primary-pressed: #362E63;
+    --primary-subtle: #EAE9F4;
+  }
+  * { box-sizing: border-box; }
+  html { height: 100%; }
+  body {
+    margin: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI",
+      "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+      "Noto Sans JP", "Yu Gothic UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.9;
+    border-top: 3px solid var(--primary);
+  }
+  main {
+    width: 100%;
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    flex: 1;
+  }
+  .site-header { padding-top: clamp(3.5rem, 10vh, 6rem); }
+  .mark { display: block; width: 56px; height: 56px; margin-bottom: 1.75rem; }
+  h1 {
+    margin: 0 0 0.35rem;
+    font-size: clamp(1.9rem, 5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+  }
+  .kana {
+    margin: 0;
+    color: var(--text-2);
+    font-size: 0.95rem;
+    letter-spacing: 0.35em;
+  }
+  .lead { margin: 2.25rem 0 0; font-size: 1.05rem; }
+  section { margin-top: 3.5rem; }
+  h2 {
+    margin: 0 0 1rem;
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+  }
+  .app-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .app-name { margin: 0; font-size: 1.2rem; font-weight: 700; }
+  .app-latin { color: var(--text-2); font-size: 0.85rem; letter-spacing: 0.06em; }
+  .badge {
+    background: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+  }
+  .card p { margin: 0.8rem 0 0; color: var(--text-2); font-size: 0.95rem; }
+  a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: color 0.15s ease;
+  }
+  a:hover { color: var(--primary-pressed); }
+  a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .site-footer {
+    margin-top: 5rem;
+    border-top: 1px solid var(--border);
+  }
+  .site-footer .inner {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 1.5rem;
+    color: var(--text-2);
+    font-size: 0.8rem;
+    line-height: 1.8;
+  }
+  .site-footer .en { display: block; margin-bottom: 0.4rem; }
+</style>
+</head>
+<body>
+<main>
+  <header class="site-header">
+    <svg class="mark" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="24" cy="24" r="21" fill="none" stroke="#453C7A" stroke-width="2.5"/>
+      <circle cx="24" cy="24" r="16.5" fill="none" stroke="#453C7A" stroke-width="1.2"/>
+      <g stroke="#453C7A" stroke-width="1.2" stroke-linecap="round">
+        <line x1="24" y1="7.5" x2="24" y2="40.5"/>
+        <line x1="7.5" y1="24" x2="40.5" y2="24"/>
+        <line x1="12.33" y1="12.33" x2="35.67" y2="35.67"/>
+        <line x1="12.33" y1="35.67" x2="35.67" y2="12.33"/>
+      </g>
+      <path d="M24 24 L24 7.5 A16.5 16.5 0 0 1 35.67 12.33 Z" fill="#453C7A"/>
+    </svg>
+    <h1>Pomelo Works</h1>
+    <p class="kana">ポメロワークス</p>
+    <p class="lead">シンプルで使いやすいモバイルアプリを、個人でつくっています。</p>
+  </header>
+
+  <section>
+    <h2>つくっているもの</h2>
+    <div class="card">
+      <div class="app-head">
+        <h3 class="app-name">ワクトラ</h3>
+        <span class="app-latin">Wakutora</span>
+        <span class="badge">開発中</span>
+      </div>
+      <p>筋力トレーニングをすばやく・シンプルに記録するAndroidアプリ。Google Playで公開予定です。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>連絡先</h2>
+    <p>お問い合わせは、下記のメールアドレスへお願いします。</p>
+    <p><a href="mailto:contact@pomeloworks.dev">contact@pomeloworks.dev</a></p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <span class="en" lang="en">Pomelo Works is an independent, one-person app studio in Tokyo, Japan.</span>
+    <!-- 公開準備時：プライバシーポリシーへのリンクをこの位置に追加する（パス方針はCLAUDE.md「将来タスク」参照） -->
+    <span>&copy; 2026 Pomelo Works</span>
+  </div>
+</footer>
+</body>
+</html>
