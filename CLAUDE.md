@@ -43,10 +43,11 @@
 | TXT | `_github-pages-challenge-pomelopun` | f502b7043e33efccdf032530edf5b2 |
 | TXT | `@`（SPF） | `v=spf1 include:_spf.mx.cloudflare.net include:_spf.google.com ~all` |
 | TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:contact@pomeloworks.dev` |
+| TXT | `cf2024-1._domainkey` | Email RoutingのDKIM。`v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBg…`（公開鍵はCloudflareが自動設定。全文はCloudflare管理画面で確認）。**触らない・削除しない** |
 
 このほか **Email Routing のMXレコードが同居している。MXには絶対に触らない**（`contact@pomeloworks.dev` の受信が止まる）。SPF・DMARCは下記の運用注記に従うこと。
 
-**送信経路とDMARCポリシーの運用注記**：`contact@` の送信はAccount BのGmail send-as（`smtp.gmail.com` 経由）。この経路はドメイン認証が整合しないため、**DMARCの `p=none` を維持すること**。`p=quarantine` / `p=reject` への強化は、ドメイン名義でDKIM署名する送信経路（外部SMTPリレー等）へ移行してから。SPFの `include:_spf.google.com` はこのGmail SMTP経由送信を許可するために追記したもの。
+**送信経路とDMARCポリシーの運用注記**：`contact@` の送信はAccount BのGmail send-as（`smtp.gmail.com` 経由）。この経路はドメイン認証が整合しないため、**DMARCの `p=none` を維持すること**。`p=quarantine` / `p=reject` への強化は、ドメイン名義でDKIM署名する送信経路（外部SMTPリレー等）へ移行してから。SPFの `include:_spf.google.com` はこのGmail SMTP経由送信を許可するために追記したもの。なお台帳のDKIM（`cf2024-1._domainkey`）はEmail Routing（受信・転送）用であり、Gmail send-asの送信には適用されない。**このDKIMの存在をもってDMARCを強化してはならない**。
 
 障害時はこの台帳とCloudflare側の実レコードを突き合わせる。`dig pomeloworks.dev +noall +answer -t A` の結果が上表の4 IPと一致するのが正常状態。
 
