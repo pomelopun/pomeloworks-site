@@ -40,7 +40,7 @@
 | A | `@` | `185.199.108.153` / `185.199.109.153` / `185.199.110.153` / `185.199.111.153`（4本） |
 | AAAA | `@` | `2606:50c0:8000::153` / `8001::153` / `8002::153` / `8003::153`（4本） |
 | CNAME | `www` | `pomelopun.github.io` |
-| TXT | `_github-pages-challenge-pomelopun` | GitHub verified domain の検証値 |
+| TXT | `_github-pages-challenge-pomelopun` | f502b7043e33efccdf032530edf5b2 |
 
 このほか **Email Routing系（MX・SPF等のTXT）が同居している。メール系レコードには絶対に触らない**（`contact@pomeloworks.dev` の配送が止まる）。
 
