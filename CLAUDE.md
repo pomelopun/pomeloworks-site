@@ -5,7 +5,7 @@
 ## サイトの3役
 
 1. **Play Console組織登録の「組織ウェブサイト」欄**（非公開項目）および、将来のストア掲載情報「デベロッパーのウェブサイト」（**公開**）
-2. **app-ads.txt の設置場所**（AdMob承認後。IAB仕様によりドメインルート直下必須）
+2. **app-ads.txt の設置場所**（設置済み。IAB仕様によりドメインルート直下必須）
 3. **プライバシーポリシーの置き場**（公開準備時に作成）
 
 ## 構成
@@ -14,6 +14,7 @@
 |---|---|
 | `index.html` | ページ本体。静的HTML1枚。**ビルドツールなし・今後も導入しない** |
 | `CNAME` | カスタムドメイン紐付け（GitHubがPages設定時に自動生成。**削除・変更禁止**） |
+| `app-ads.txt` | AdMob広告在庫の正規販売者宣言（IAB仕様）。**ルート直下必須・パス変更禁止**。下記「app-ads.txt」参照 |
 | `.nojekyll` | GitHub PagesのJekyll処理を無効化する空ファイル |
 | `CLAUDE.md` | 本ファイル |
 
@@ -30,6 +31,20 @@
 - **アクセス解析・トラッキングを入れない**。サイト側の情報収集ゼロを維持し、アプリのプライバシー方針と整合させる。
 - 配色はアプリのカラートークン表（design_color_tokens v0.3 ライトモード）に整合させる。`index.html` の `:root` CSS変数が対応表。
 - **`pomelopun.github.io`（ユーザーサイトリポジトリ）を作成してカスタムドメインを付けることは恒久的に禁止**。ユーザーサイトへのカスタムドメイン設定はアカウント配下の全プロジェクトサイトの基底URLに波及し、リモートメッセージ配信URL（配信設計書D-40：`https://pomelopun.github.io/workout-tracker-messages/v1/messages.ja.json`）がリダイレクト経由に変質するため。
+
+## app-ads.txt
+
+2026-08-23 設置済み。内容は次の1行（末尾に改行あり）：
+
+```
+google.com, pub-2874004131127276, DIRECT, f08c47fec0942fa0
+```
+
+- `pub-2874004131127276` はAdMobのサイト運営者ID。`f08c47fec0942fa0` はGoogleの認証機関IDで全パブリッシャー共通の固定値。
+- **ルート直下（`https://pomeloworks.dev/app-ads.txt`）から動かさない**。IAB仕様でパスが固定されており、移動＝宣言の消失として扱われる。
+- 内容を書き換えるのは、AdMobのサイト運営者IDが変わったときと、他のアドネットワークを追加したとき（1行1販売者で追記）のみ。
+- 確認：`curl -s https://pomeloworks.dev/app-ads.txt` が上記1行を返すこと（配信確認済み）。
+- 残作業：AdMob管理画面（アプリ > app-ads.txt）でクロール状態を確認する。反映まで最大24時間程度。前提として、ストア掲載情報の「デベロッパーのウェブサイト」に `https://pomeloworks.dev` が設定されていること（AdMobはストア掲載のURLからドメインを引いてクロールする）。
 
 ## DNS台帳（Cloudflare／pomeloworks.dev ゾーン）
 
@@ -52,18 +67,6 @@
 障害時はこの台帳とCloudflare側の実レコードを突き合わせる。`dig pomeloworks.dev +noall +answer -t A` の結果が上表の4 IPと一致するのが正常状態。
 
 ## 将来タスク
-
-### app-ads.txt（AdMob承認後）
-
-- ルート直下に `app-ads.txt` を追加。内容は次の1行（`pub-` 以降はAdMobのサイト運営者ID）：
-
-  ```
-  google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
-  ```
-
-  末尾の `f08c47fec0942fa0` はGoogleの認証機関IDで全パブリッシャー共通の固定値。
-- 前提：ストア掲載情報の「デベロッパーのウェブサイト」に `https://pomeloworks.dev` が設定されていること（AdMobはストア掲載のURLからドメインを引いてクロールする）。
-- 設置後：AdMob管理画面（アプリ > app-ads.txt）でクロール状態を確認。反映まで最大24時間程度。
 
 ### プライバシーポリシー（公開準備時）
 
