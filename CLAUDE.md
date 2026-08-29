@@ -6,7 +6,7 @@
 
 1. **Play Console組織登録の「組織ウェブサイト」欄**（非公開項目）および、将来のストア掲載情報「デベロッパーのウェブサイト」（**公開**）
 2. **app-ads.txt の設置場所**（設置済み。IAB仕様によりドメインルート直下必須）
-3. **プライバシーポリシーの置き場**（公開準備時に作成）
+3. **プライバシーポリシーの置き場**（設置済み：`https://pomeloworks.dev/wakutora/privacy/`）
 
 ## 構成
 
@@ -15,6 +15,7 @@
 | `index.html` | ページ本体。静的HTML1枚。**ビルドツールなし・今後も導入しない** |
 | `CNAME` | カスタムドメイン紐付け（GitHubがPages設定時に自動生成。**削除・変更禁止**） |
 | `app-ads.txt` | AdMob広告在庫の正規販売者宣言（IAB仕様）。**ルート直下必須・パス変更禁止**。下記「app-ads.txt」参照 |
+| `wakutora/privacy/index.html` | ワクトラのプライバシーポリシー。公開URLは `https://pomeloworks.dev/wakutora/privacy/`。**本文は開発者承認済みのverbatim・改変禁止**。下記「プライバシーポリシー」参照 |
 | `.nojekyll` | GitHub PagesのJekyll処理を無効化する空ファイル |
 | `CLAUDE.md` | 本ファイル |
 
@@ -66,13 +67,17 @@ google.com, pub-2874004131127276, DIRECT, f08c47fec0942fa0
 
 障害時はこの台帳とCloudflare側の実レコードを突き合わせる。`dig pomeloworks.dev +noall +answer -t A` の結果が上表の4 IPと一致するのが正常状態。
 
+## プライバシーポリシー
+
+2026-08-29 設置済み。公開URLは `https://pomeloworks.dev/wakutora/privacy/`（ディレクトリ＋`index.html`。**末尾スラッシュ付きのこのURLが正**）。
+
+- **本文は開発者承認済みのverbatim。文言の変更・誤字修正を独断で行わない**。改定が必要な場合は承認を取ってから差し替える（本文§6が改定手続を定めている）。
+- 参照元が複数ある公開パスのため**リネーム・削除禁止**：アプリ設定画面（S-08）の`PRIVACY_POLICY_URL`、Play Consoleのストア掲載「プライバシーポリシー」欄、データセーフティ申告が同URLを指す。
+- 内容は`app-ads.txt`・DNS・トップページとは独立。設置作業でそれらに触れない。
+- 確認：`curl -sI https://pomeloworks.dev/wakutora/privacy/ | head -1` が `200` を返すこと。
+- 残作業：Play Consoleのストア掲載「プライバシーポリシー」欄に同URLを登録する。`index.html` フッターのコメント位置へのリンク追加は任意（開発者判断・未実施）。
+
 ## 将来タスク
-
-### プライバシーポリシー（公開準備時）
-
-- パス方針：`/wakutora/privacy.html`（アプリ名スラッグの最終確定は商標確認後・起草時。確定までパスを作らない）。
-- 作成後、`index.html` フッターのコメント位置にリンクを追加する。
-- Play Consoleのストア掲載「プライバシーポリシー」欄に同URLを登録する。
 
 ### ストア公開時
 
