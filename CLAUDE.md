@@ -10,18 +10,32 @@
 
 ## 構成
 
+**`docs/` の中だけがWebに配信される。その外にあるものは配信されない**（下記「配信範囲」参照）。
+
 | ファイル | 役割 |
 |---|---|
-| `index.html` | ページ本体。静的HTML1枚。**ビルドツールなし・今後も導入しない** |
-| `CNAME` | カスタムドメイン紐付け（GitHubがPages設定時に自動生成。**削除・変更禁止**） |
-| `app-ads.txt` | AdMob広告在庫の正規販売者宣言（IAB仕様）。**ルート直下必須・パス変更禁止**。下記「app-ads.txt」参照 |
-| `wakutora/privacy/index.html` | ワクトラのプライバシーポリシー。公開URLは `https://pomeloworks.dev/wakutora/privacy/`。**本文は開発者承認済みのverbatim・改変禁止**。下記「プライバシーポリシー」参照 |
-| `.nojekyll` | GitHub PagesのJekyll処理を無効化する空ファイル |
-| `CLAUDE.md` | 本ファイル |
+| `docs/index.html` | ページ本体。静的HTML1枚。**ビルドツールなし・今後も導入しない** |
+| `docs/CNAME` | カスタムドメイン紐付け。**削除・変更・配信フォルダ外への移動を禁止**（配信フォルダ直下にある必要がある） |
+| `docs/app-ads.txt` | AdMob広告在庫の正規販売者宣言（IAB仕様）。公開URLは `https://pomeloworks.dev/app-ads.txt`。**ドメインルート直下必須・パス変更禁止**。下記「app-ads.txt」参照 |
+| `docs/wakutora/privacy/index.html` | ワクトラのプライバシーポリシー。公開URLは `https://pomeloworks.dev/wakutora/privacy/`。**本文は開発者承認済みのverbatim・改変禁止**。下記「プライバシーポリシー」参照 |
+| `docs/.nojekyll` | GitHub PagesのJekyll処理を無効化する空ファイル |
+| `CLAUDE.md` | 本ファイル。**配信対象外** |
+| `handoff/` | 作業ハンドオフ文書の控え。**配信対象外** |
+| `.gitignore` | WSLが生成する `*:Zone.Identifier` を除外するだけのファイル |
+
+## 配信範囲
+
+GitHub Pagesのソースは **`main` ブランチの `/docs`**（2026-08-29に `/` から変更）。`docs/` が配信上のドメインルートとして扱われる。
+
+- **`docs/` に置いたファイルは、パスがそのまま公開URLになる**。`docs/foo/bar.html` → `https://pomeloworks.dev/foo/bar.html`。非公開にしたいファイルを `docs/` に入れない。
+- **`docs/` の外（`CLAUDE.md`・`handoff/` 等）は配信されない**。HTMLかどうかは無関係で、判定基準は「`docs/` 配下にcommitされているか」の一点のみ。Pagesに除外リストのような設定項目は存在しない。
+- **`.nojekyll` があるためJekyllの暗黙のフィルタは働かない**。`_` や `.` で始まるファイルも `docs/` にあれば配信される。
+- **配信されないことと、秘密であることは別**。このリポジトリはGitHub上でPUBLICなので、`CLAUDE.md` も `handoff/` も `https://github.com/pomelopun/pomeloworks-site` からは誰でも読める。**外部に見せられない値をこのリポジトリに書かない**（git履歴からも消えない）。
+- ソース設定を変更しても再ビルドは自動で走らない。変更時は `gh api -X POST repos/pomelopun/pomeloworks-site/pages/builds` でビルドを要求すること。
 
 ## 更新手順
 
-1. ファイルを編集し、main へ commit・push する。**デプロイ作業は存在しない**（pushでGitHub Pagesが自動再デプロイ）。ブランチはmainのみ。
+1. `docs/` 配下のファイルを編集し、main へ commit・push する。**デプロイ作業は存在しない**（pushでGitHub Pagesが自動再デプロイ）。ブランチはmainのみ。
 2. 反映確認：`curl -sI https://pomeloworks.dev/ | head -1` が `200` を返すこと。反映遅延＝Pagesデプロイ1〜2分＋CDNキャッシュ最大10分（`Cache-Control: max-age=600`）。即時反映されない前提で慌てない。
 3. 見た目の確認はブラウザで https://pomeloworks.dev/ を開く（キャッシュ残りに注意）。
 
@@ -30,7 +44,7 @@
 - **公開済みパスは追加のみ・転用禁止**（配信リポジトリと同じ規律）。ストア掲載・審査書類・AdMobにURLが記載されるため、一度公開したパスのリネーム・削除・意味変更をしない。
 - **個人情報を載せない**：本名・自宅住所・電話番号は掲載禁止。住所はVO住所であっても掲載しない方針（掲載義務なし。公開経路を増やさない）。
 - **アクセス解析・トラッキングを入れない**。サイト側の情報収集ゼロを維持し、アプリのプライバシー方針と整合させる。
-- 配色はアプリのカラートークン表（design_color_tokens v0.3 ライトモード）に整合させる。`index.html` の `:root` CSS変数が対応表。
+- 配色はアプリのカラートークン表（design_color_tokens v0.3 ライトモード）に整合させる。`docs/index.html` の `:root` CSS変数が対応表。
 - **`pomelopun.github.io`（ユーザーサイトリポジトリ）を作成してカスタムドメインを付けることは恒久的に禁止**。ユーザーサイトへのカスタムドメイン設定はアカウント配下の全プロジェクトサイトの基底URLに波及し、リモートメッセージ配信URL（配信設計書D-40：`https://pomelopun.github.io/workout-tracker-messages/v1/messages.ja.json`）がリダイレクト経由に変質するため。
 
 ## app-ads.txt
@@ -42,7 +56,7 @@ google.com, pub-2874004131127276, DIRECT, f08c47fec0942fa0
 ```
 
 - `pub-2874004131127276` はAdMobのサイト運営者ID。`f08c47fec0942fa0` はGoogleの認証機関IDで全パブリッシャー共通の固定値。
-- **ルート直下（`https://pomeloworks.dev/app-ads.txt`）から動かさない**。IAB仕様でパスが固定されており、移動＝宣言の消失として扱われる。
+- 実体は `docs/app-ads.txt`。**公開URL（`https://pomeloworks.dev/app-ads.txt`）をドメインルート直下から動かさない**。IAB仕様でパスが固定されており、移動＝宣言の消失として扱われる。
 - 内容を書き換えるのは、AdMobのサイト運営者IDが変わったときと、他のアドネットワークを追加したとき（1行1販売者で追記）のみ。
 - 確認：`curl -s https://pomeloworks.dev/app-ads.txt` が上記1行を返すこと（配信確認済み）。
 - 残作業：AdMob管理画面（アプリ > app-ads.txt）でクロール状態を確認する。反映まで最大24時間程度。前提として、ストア掲載情報の「デベロッパーのウェブサイト」に `https://pomeloworks.dev` が設定されていること（AdMobはストア掲載のURLからドメインを引いてクロールする）。
@@ -69,16 +83,16 @@ google.com, pub-2874004131127276, DIRECT, f08c47fec0942fa0
 
 ## プライバシーポリシー
 
-2026-08-29 設置済み。公開URLは `https://pomeloworks.dev/wakutora/privacy/`（ディレクトリ＋`index.html`。**末尾スラッシュ付きのこのURLが正**）。
+2026-08-29 設置済み。実体は `docs/wakutora/privacy/index.html`、公開URLは `https://pomeloworks.dev/wakutora/privacy/`（**末尾スラッシュ付きのこのURLが正**。スラッシュなしは301で転送されるが、登録には正規URLを使う）。
 
 - **本文は開発者承認済みのverbatim。文言の変更・誤字修正を独断で行わない**。改定が必要な場合は承認を取ってから差し替える（本文§6が改定手続を定めている）。
 - 参照元が複数ある公開パスのため**リネーム・削除禁止**：アプリ設定画面（S-08）の`PRIVACY_POLICY_URL`、Play Consoleのストア掲載「プライバシーポリシー」欄、データセーフティ申告が同URLを指す。
 - 内容は`app-ads.txt`・DNS・トップページとは独立。設置作業でそれらに触れない。
 - 確認：`curl -sI https://pomeloworks.dev/wakutora/privacy/ | head -1` が `200` を返すこと。
-- 残作業：Play Consoleのストア掲載「プライバシーポリシー」欄に同URLを登録する。`index.html` フッターのコメント位置へのリンク追加は任意（開発者判断・未実施）。
+- 残作業：Play Consoleのストア掲載「プライバシーポリシー」欄に同URLを登録する。`docs/index.html` フッターのコメント位置へのリンク追加は任意（開発者判断・未実施）。
 
 ## 将来タスク
 
 ### ストア公開時
 
-- `index.html` のワクトラ欄を「開発中」バッジからGoogle Playリンクへ更新する。
+- `docs/index.html` のワクトラ欄を「開発中」バッジからGoogle Playリンクへ更新する。
