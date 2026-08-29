@@ -89,7 +89,8 @@ google.com, pub-2874004131127276, DIRECT, f08c47fec0942fa0
 - 参照元が複数ある公開パスのため**リネーム・削除禁止**：アプリ設定画面（S-08）の`PRIVACY_POLICY_URL`、Play Consoleのストア掲載「プライバシーポリシー」欄、データセーフティ申告が同URLを指す。
 - 内容は`app-ads.txt`・DNS・トップページとは独立。設置作業でそれらに触れない。
 - 確認：`curl -sI https://pomeloworks.dev/wakutora/privacy/ | head -1` が `200` を返すこと。
-- 残作業：Play Consoleのストア掲載「プライバシーポリシー」欄に同URLを登録する。`docs/index.html` フッターのコメント位置へのリンク追加は任意（開発者判断・未実施）。
+- `docs/index.html` のフッターからリンク済み（2026-08-30）。ポリシー側フッターからもトップへ戻れる。
+- 残作業：Play Consoleのストア掲載「プライバシーポリシー」欄に同URLを登録する。
 
 ## 将来タスク
 
