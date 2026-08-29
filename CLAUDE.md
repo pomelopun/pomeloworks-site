@@ -21,6 +21,7 @@
 | `docs/.nojekyll` | GitHub PagesのJekyll処理を無効化する空ファイル |
 | `CLAUDE.md` | 本ファイル。**配信対象外** |
 | `handoff/` | 作業ハンドオフ文書の控え。**配信対象外** |
+| `work_logs/` | 作業ログ。`YYYY-MM-DD_slug.md` で1セッション1ファイル。**配信対象外** |
 | `.gitignore` | WSLが生成する `*:Zone.Identifier` を除外するだけのファイル |
 
 ## 配信範囲
