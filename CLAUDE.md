@@ -4,7 +4,7 @@
 
 ## サイトの3役
 
-1. **Play Console組織登録の「組織ウェブサイト」欄**（非公開項目）および、将来のストア掲載情報「デベロッパーのウェブサイト」（**公開**）
+1. **Play Console組織登録の「組織ウェブサイト」欄**（非公開項目）および、ストア掲載情報「デベロッパーのウェブサイト」（**公開**）
 2. **app-ads.txt の設置場所**（設置済み。IAB仕様によりドメインルート直下必須）
 3. **プライバシーポリシーの置き場**（設置済み：`https://pomeloworks.dev/wakutora/privacy/`）
 
@@ -60,7 +60,7 @@ google.com, pub-2874004131127276, DIRECT, f08c47fec0942fa0
 - 実体は `docs/app-ads.txt`。**公開URL（`https://pomeloworks.dev/app-ads.txt`）をドメインルート直下から動かさない**。IAB仕様でパスが固定されており、移動＝宣言の消失として扱われる。
 - 内容を書き換えるのは、AdMobのサイト運営者IDが変わったときと、他のアドネットワークを追加したとき（1行1販売者で追記）のみ。
 - 確認：`curl -s https://pomeloworks.dev/app-ads.txt` が上記1行を返すこと（配信確認済み）。
-- 残作業：AdMob管理画面（アプリ > app-ads.txt）でクロール状態を確認する。反映まで最大24時間程度。前提として、ストア掲載情報の「デベロッパーのウェブサイト」に `https://pomeloworks.dev` が設定されていること（AdMobはストア掲載のURLからドメインを引いてクロールする）。
+- AdMobはストア掲載情報の「デベロッパーのウェブサイト」（`https://pomeloworks.dev`）からドメインを引いてクロールする。**この欄を別ドメインに変えると宣言が見つからなくなる**。
 
 ## DNS台帳（Cloudflare／pomeloworks.dev ゾーン）
 
@@ -91,7 +91,6 @@ google.com, pub-2874004131127276, DIRECT, f08c47fec0942fa0
 - 内容は`app-ads.txt`・DNS・トップページとは独立。設置作業でそれらに触れない。
 - 確認：`curl -sI https://pomeloworks.dev/wakutora/privacy/ | head -1` が `200` を返すこと。
 - `docs/index.html` のフッターからリンク済み（2026-08-30）。ポリシー側フッターからもトップへ戻れる。
-- 残作業：Play Consoleのストア掲載「プライバシーポリシー」欄に同URLを登録する。
 
 ## ワクトラのストア掲載
 
