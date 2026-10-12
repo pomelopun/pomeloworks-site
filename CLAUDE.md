@@ -93,8 +93,6 @@ google.com, pub-2874004131127276, DIRECT, f08c47fec0942fa0
 - `docs/index.html` のフッターからリンク済み（2026-08-30）。ポリシー側フッターからもトップへ戻れる。
 - 残作業：Play Consoleのストア掲載「プライバシーポリシー」欄に同URLを登録する。
 
-## 将来タスク
+## ワクトラのストア掲載
 
-### ストア公開時
-
-- `docs/index.html` のワクトラ欄を「開発中」バッジからGoogle Playリンクへ更新する。
+2026-10-12 Google Playで公開。`docs/index.html` のワクトラ欄はバッジを「配信中」とし、掲載ページ `https://play.google.com/store/apps/details?id=dev.pomeloworks.wakutora&hl=ja` へリンクしている（HTML内では `&` を `&amp;` と書く）。
